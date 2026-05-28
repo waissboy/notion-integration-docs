@@ -5,8 +5,7 @@
  * classic ChatGPT style. It's designed for users who prefer that familiar,
  * clean aesthetic, adjusting fonts, colors, and layout for a more
  * comfortable user experience.
- * 
- * Supports both light and dark modes - automatically follows TypingMind's theme setting.
+ * * Supports both light and dark modes - automatically follows TypingMind's theme setting.
  */
 (function () {
     'use strict';
@@ -183,6 +182,11 @@
       html.dark ${SELECTORS.THOUGHT_DETAILS_SPECIFIC} > div, html.dark ${SELECTORS.THOUGHT_DETAILS_SPECIFIC} > div * { color: ${dark.thought.text} !important; font-size: ${CONFIG.fonts.thought.size} !important; font-style: italic !important; line-height: ${CONFIG.fonts.thought.lineHeight} !important; font-weight: ${CONFIG.fonts.thought.weight} !important; }
       
       /* ===== SHARED (both modes) ===== */
+      /* 隱藏空白聊天區域中央的 TypingMind 標誌與歡迎標語 */
+      .dynamic-chat-content-container .flex-col.justify-start.items-center.gap-y-3.inline-flex {
+          display: none !important;
+      }
+
       [data-element-id="chat-space-middle-part"] .text-xs.text-gray-500.truncate, [data-element-id="chat-space-middle-part"] .italic.truncate.hover\\:underline, [data-element-id="chat-space-middle-part"] .flex.items-start.justify-center.flex-col.gap-2 { font-size: unset !important; line-height: unset !important; font-family: unset !important; color: unset !important; font-weight: unset !important; }
       [data-element-id="chat-space-middle-part"] [data-element-id="response-block"]:has([data-element-id="user-message"]) [data-element-id="chat-avatar-container"] { display: none !important; }
       .prose > div:has(> pre) { overflow: visible !important; }
