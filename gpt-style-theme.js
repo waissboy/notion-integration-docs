@@ -187,4 +187,194 @@
           display: none !important;
       }
 
-      [data-element-id="chat-space-middle-part"] .text-xs.text-gray-500.truncate,
+      [data-element-id="chat-space-middle-part"] .text-xs.text-gray-500.truncate, [data-element-id="chat-space-middle-part"] .italic.truncate.hover\\:underline, [data-element-id="chat-space-middle-part"] .flex.items-start.justify-center.flex-col.gap-2 { font-size: unset !important; line-height: unset !important; font-family: unset !important; color: unset !important; font-weight: unset !important; }
+      [data-element-id="chat-space-middle-part"] [data-element-id="response-block"]:has([data-element-id="user-message"]) [data-element-id="chat-avatar-container"] { display: none !important; }
+      .prose > div:has(> pre) { overflow: visible !important; }
+      ${SELECTORS.CODE_BLOCK_CONTAINER} > div.relative { position: relative !important; }
+      ${SELECTORS.CODE_BLOCK_CONTAINER} > div.relative > div > pre { border: none !important; background: transparent !important; margin: 0 !important; padding: 1em !important; }
+      [data-element-id="chat-space-middle-part"] [data-element-id="response-block"]:hover { background-color: transparent !important; }
+      [data-element-id="chat-space-middle-part"] .prose.max-w-full ul, [data-element-id="chat-space-middle-part"] .prose.max-w-full ol { margin: 0.5rem 0 !important; }
+      [data-element-id="chat-space-middle-part"] .prose.max-w-full li { margin: 0.3rem 0 !important; }
+      [data-element-id="chat-space-middle-part"] .prose.max-w-full ul > li { list-style-type: disc !important; padding-left: 0.5rem !important; }
+      [data-element-id="chat-space-middle-part"] .prose.max-w-full ol > li { list-style-type: decimal !important; padding-left: 0.5rem !important; }
+      
+      /* Set a max-height and overflow for the code container to enable internal scrolling for sticky header. */
+      ${SELECTORS.CODE_BLOCK_CONTAINER} > div.relative > div:last-child {
+          max-height: 600px;
+          overflow-y: auto !important;
+      }
+    `;
+    document.head.appendChild(mainStyle);
+
+    const inputStyle = document.createElement('style');
+    inputStyle.textContent = `
+      /* ===== LIGHT MODE INPUT ===== */
+      html:not(.dark) [data-element-id="chat-space-end-part"] [role="presentation"] { background-color: ${light.input.background}; border-radius: ${CONFIG.borderRadius.large}; margin-bottom: ${CONFIG.spacing.medium}; }
+      html:not(.dark) #chat-input-textbox { font-family: ${CONFIG.fonts.primary}; font-size: 16px !important; line-height: 24px !important; min-height: 44px !important; padding: 0.75rem 1rem !important; border-radius: 1.5rem !important; color: ${light.input.text} !important; border: 0 solid ${light.border} !important; outline: none !important; margin: 8px 0 !important; overflow-wrap: break-word !important; tab-size: 4 !important; text-size-adjust: 100% !important; white-space: pre-wrap !important; font-variant-ligatures: none !important; -webkit-tap-highlight-color: transparent !important; font-weight: ${CONFIG.fonts.weights.normal} !important; }
+      html:not(.dark) #chat-input-textbox::placeholder { color: ${light.input.placeholder} !important; opacity: 1 !important; font-weight: ${CONFIG.fonts.weights.normal} !important; }
+      html:not(.dark) [data-element-id="chat-input-actions"] button:not([data-element-id="send-button"]):not([data-element-id="more-options-button"]):not([data-element-id="replace-only-button"]) { transition: all 0.2s ease !important; color: ${light.text} !important; }
+      html:not(.dark) [data-element-id="chat-input-actions"] button:not([data-element-id="send-button"]):not([data-element-id="more-options-button"]):not([data-element-id="replace-only-button"]):hover { background-color: ${light.hoverOverlay} !important; border-radius: 0.5rem !important; }
+      html:not(.dark) [data-element-id="send-button"], html:not(.dark) [data-element-id="more-options-button"] { background-color: ${light.button.primary} !important; border-color: ${light.button.primary} !important; }
+      html:not(.dark) [data-element-id="send-button"]:hover, html:not(.dark) [data-element-id="more-options-button"]:hover { background-color: ${light.button.hover} !important; border-color: ${light.button.hover} !important; }
+      html:not(.dark) [data-element-id="regenerate-button"] { background-color: ${light.button.primary} !important; border-color: ${light.button.primary} !important; color: #fff !important; }
+      html:not(.dark) [data-element-id="regenerate-button"]:hover { background-color: ${light.button.hover} !important; border-color: ${light.button.hover} !important; }
+      
+      /* ===== DARK MODE INPUT ===== */
+      html.dark [data-element-id="chat-space-end-part"] [role="presentation"] { background-color: ${dark.input.background}; border-radius: ${CONFIG.borderRadius.large}; margin-bottom: ${CONFIG.spacing.medium}; }
+      html.dark #chat-input-textbox { font-family: ${CONFIG.fonts.primary}; font-size: 16px !important; line-height: 24px !important; min-height: 44px !important; padding: 0.75rem 1rem !important; border-radius: 1.5rem !important; color: ${dark.input.text} !important; border: 0 solid ${dark.border} !important; outline: none !important; margin: 8px 0 !important; overflow-wrap: break-word !important; tab-size: 4 !important; text-size-adjust: 100% !important; white-space: pre-wrap !important; font-variant-ligatures: none !important; -webkit-tap-highlight-color: transparent !important; font-weight: ${CONFIG.fonts.weights.normal} !important; }
+      html.dark #chat-input-textbox::placeholder { color: ${dark.input.placeholder} !important; opacity: 1 !important; font-weight: ${CONFIG.fonts.weights.normal} !important; }
+      html.dark [data-element-id="chat-input-actions"] button:not([data-element-id="send-button"]):not([data-element-id="more-options-button"]):not([data-element-id="replace-only-button"]) { transition: all 0.2s ease !important; color: ${dark.text} !important; }
+      html.dark [data-element-id="chat-input-actions"] button:not([data-element-id="send-button"]):not([data-element-id="more-options-button"]):not([data-element-id="replace-only-button"]):hover { background-color: ${dark.hoverOverlay} !important; border-radius: 0.5rem !important; }
+      /* Dark mode: light button with dark text (inverted for visibility in dark mode) */
+      html.dark [data-element-id="send-button"], html.dark [data-element-id="more-options-button"] { background-color: #ececec !important; border-color: #ececec !important; color: #212121 !important; }
+      html.dark [data-element-id="send-button"]:hover, html.dark [data-element-id="more-options-button"]:hover { background-color: #d4d4d4 !important; border-color: #d4d4d4 !important; }
+      html.dark [data-element-id="regenerate-button"] { background-color: #ececec !important; border-color: #ececec !important; color: #212121 !important; }
+      html.dark [data-element-id="regenerate-button"]:hover { background-color: #d4d4d4 !important; border-color: #d4d4d4 !important; }
+      
+      /* ===== SHARED INPUT ===== */
+      [data-element-id="chat-input-actions"] button:not([data-element-id="send-button"]):not([data-element-id="more-options-button"]):not([data-element-id="replace-only-button"]) svg { width: 20px !important; height: 20px !important; vertical-align: middle !important; }
+      [data-element-id="chat-input-actions"] { padding: 0.5rem 0.75rem !important; }
+      
+      /* Hide the scroll indicator gradient in dark mode (appears as dark box near Send button) */
+      html.dark .scroll-indicator-gradient { background: transparent !important; }
+      html.dark .scroll-indicator-gradient::before, html.dark .scroll-indicator-gradient::after { display: none !important; }
+    `;
+    document.head.appendChild(inputStyle);
+
+    /**
+     * ----------------------------
+     * 5) Text Parsing & Formatting
+     * ----------------------------
+     */
+    function multiStepParse(rawText) {
+        return Utils.safe(() => {
+            let processedHtml = rawText;
+            const codeBlockRegex = /^(```|""")(\w*)\s*([\s\S]*?)\s*\1$/gm;
+            const placeholders = [];
+            processedHtml = processedHtml.replace(codeBlockRegex, (match, delimiter, lang, code) => {
+                lang = lang ? lang.toLowerCase() : ''; const escapedCode = Utils.escapeHtml(code);
+                const placeholder = `__CODEBLOCK_${placeholders.length}__`;
+                placeholders.push(`<pre><div class="relative"><div class="sticky top-0 flex items-center bg-gray-200 dark:bg-gray-900 pl-[12px] pr-1 justify-between"><span class="text-xs font-light">${lang || 'code'}</span><button class="rounded-full flex items-center gap-1 dark:bg-gray-900 dark:text-white py-1 px-2.5 text-xs font-light text-gray-900 font-sans select-none">...</button></div><div><pre style="..."><code style="white-space: pre; line-height: inherit; font-size: inherit;">${escapedCode}</code></pre></div></div></pre>`);
+                return placeholder;
+            });
+            processedHtml = Utils.escapeHtml(processedHtml);
+            placeholders.forEach((blockHtml, index) => { processedHtml = processedHtml.replace(`__CODEBLOCK_${index}__`, blockHtml); });
+            return processedHtml;
+        }, 'multiStepParse');
+    }
+    const parsingStyle = document.createElement('style'); parsingStyle.id = 'typingmind-parsing-style';
+    parsingStyle.textContent = `
+      /* Light mode inline code */
+      html:not(.dark) .inline-code { background-color: ${light.inlineCode.background} !important; padding: 0.2em 0.4em !important; margin: 0 0.1em !important; border-radius: 3px !important; border: 1px solid ${light.inlineCode.border} !important; font-family: ${CONFIG.fonts.code} !important; font-size: 90% !important; font-weight: ${CONFIG.fonts.weights.normal} !important; color: ${light.inlineCode.text} !important; }
+      /* Dark mode inline code */
+      html.dark .inline-code { background-color: ${dark.inlineCode.background} !important; padding: 0.2em 0.4em !important; margin: 0 0.1em !important; border-radius: 3px !important; border: 1px solid ${dark.inlineCode.border} !important; font-family: ${CONFIG.fonts.code} !important; font-size: 90% !important; font-weight: ${CONFIG.fonts.weights.normal} !important; color: ${dark.inlineCode.text} !important; }
+    `;
+    if (!document.getElementById('typingmind-parsing-style')) { document.head.appendChild(parsingStyle); }
+
+    function processMessageContent(rawText) {
+        return Utils.safe(() => multiStepParse(rawText), 'processMessageContent');
+    }
+    function styleUserMessageEl(msgEl) {
+        Utils.safe(() => {
+            if (msgEl.hasAttribute('data-processed')) return;
+
+            // Check if the message contains a file attachment block.
+            const hasAttachment = msgEl.querySelector('.group\\/attachment');
+
+            // Iterate over the direct children of the message element.
+            // This avoids destroying the attachment's HTML structure.
+            for (const child of msgEl.children) {
+                // Only process child elements that are NOT the attachment block or its container.
+                if (hasAttachment && child.querySelector('.group\\/attachment')) {
+                    continue;
+                }
+
+                const rawText = child.textContent || '';
+                if (rawText.trim() === '') continue;
+
+                // Only apply markdown parsing if markdown characters are present.
+                if (/[*`~_]/.test(rawText) || rawText.includes('```') || rawText.includes('"""')) {
+                    const processedHtml = processMessageContent(rawText);
+                    child.innerHTML = processedHtml;
+                }
+            }
+
+            msgEl.setAttribute('data-processed', 'true');
+        }, 'styleUserMessageEl');
+    }
+    function handleJsonCodeBlock(codeEl) {
+        Utils.safe(() => { const content = codeEl.textContent.trim(); if (!(content.startsWith('{') && content.endsWith('}') && content.includes('"code"'))) { return; } try { const json = JSON.parse(content); if (typeof json.code !== 'string') return; let clean = json.code.replace(/\\n/g, '\n').replace(/^"|"$/g, ''); codeEl.textContent = clean; codeEl.style.fontFamily = CONFIG.fonts.code; codeEl.style.whiteSpace = 'pre-wrap'; codeEl.style.wordWrap = 'break-word'; } catch (e) { console.error('Error parsing JSON code block:', e, content.substring(0, 100) + '...'); } }, 'handleJsonCodeBlock');
+    }
+    function styleSandboxOutputs() {
+        document.querySelectorAll(`${SELECTORS.AI_RESPONSE_BLOCK} ${SELECTORS.RESULT_BLOCKS}`).forEach(preEl => { if (preEl.closest('.editing')) return; const container = preEl.closest('.pb-6'); if (container) container.style.overflowX = 'auto'; });
+    }
+
+    // No JS tagging for Regenerate; styled directly via CSS above.
+
+    /**
+     * ----------------------------
+     * 8) Main Display Handler
+     * ----------------------------
+     */
+    const improveTextDisplay = Utils.debounce(
+        (rootNode = document) =>
+            Utils.safe(() => {
+                const scope = rootNode === document ? document.body : rootNode;
+                scope.querySelectorAll(SELECTORS.USER_MESSAGE_BLOCK).forEach(msg => { if (msg.closest('.editing') || msg.hasAttribute('data-processed')) return; styleUserMessageEl(msg); });
+                scope.querySelectorAll(SELECTORS.CODE_BLOCKS).forEach(code => { if (!code.closest('.editing')) handleJsonCodeBlock(code); });
+                styleSandboxOutputs();
+            }, 'improveTextDisplay'),
+        350
+    );
+
+    /**
+     * ----------------------------
+     * 9) Initialization
+     * ----------------------------
+     */
+    function initTheme() {
+        applySidebarStyles();
+        fixSearchPlaceholder();
+
+        // Apply a global style fix for text selection.
+        const selectionFixStyle = document.createElement('style');
+        selectionFixStyle.id = 'typingmind-selection-fix';
+        selectionFixStyle.textContent = ` .highlight-darkblue::selection, .highlight-darkblue *::selection { background-color: Highlight !important; color: HighlightText !important; } `;
+        if (!document.getElementById('typingmind-selection-fix')) {
+            document.head.appendChild(selectionFixStyle);
+        }
+
+        const observeDomChanges = () => {
+            const observer = new MutationObserver(mutations => {
+                let requiresVisualUpdate = false;
+                for (const mutation of mutations) {
+                    if (mutation.type === 'childList') {
+                        for (const node of mutation.addedNodes) {
+                            if (node.nodeType === Node.ELEMENT_NODE && (node.matches(SELECTORS.USER_MESSAGE_BLOCK) || node.matches(SELECTORS.AI_RESPONSE_BLOCK) || node.querySelector(SELECTORS.USER_MESSAGE_BLOCK) || node.querySelector(SELECTORS.AI_RESPONSE_BLOCK))) {
+                                requiresVisualUpdate = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (requiresVisualUpdate) break;
+                }
+                if (requiresVisualUpdate) {
+                    improveTextDisplay();
+                }
+            });
+            observer.observe(document.body, { childList: true, subtree: true });
+        };
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                improveTextDisplay();
+                observeDomChanges();
+            });
+        } else {
+            improveTextDisplay();
+            observeDomChanges();
+        }
+    }
+
+    initTheme();
+
+})();
